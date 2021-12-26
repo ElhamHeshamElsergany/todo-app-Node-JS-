@@ -24,17 +24,17 @@ router.post('/login', async (req, res, next) => {
   res.json({ token })
 })
 
-router.patch('/:userName', async (req, res) => {
+router.patch('/:id', async (req, res, next) => {
   const updateObject = req.body;
   const { id } = req.params;
-  await User.updateOne(updateObject).then(data => res.send('Done Edit'))
+  await User.findByIdAndUpdate(req.params.id, updateObject).then(data => res.send('Done Editing'))
     .catch(e => next(e))
 })
 
-router.delete('/:userName', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   const deletedObject = req.body;
   const { id } = req.params;
-  await User.deleteOne(deletedObject).then(data => res.send('this todo is Deleted'))
+  await User.findByIdAndDelete(req.params.id, deletedObject).then(data => res.send('this todo is Deleted'))
     .catch(d => next(d))
 })
 module.exports = router;
