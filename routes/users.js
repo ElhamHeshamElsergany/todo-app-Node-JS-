@@ -31,9 +31,10 @@ router.patch('/:userName', async (req, res) => {
     .catch(e => next(e))
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:userName', async (req, res) => {
+  const deletedObject = req.body;
   const { id } = req.params;
-  await deleteOne(id, req.body).then(data => res.send('this todo is Deleted'))
+  await User.deleteOne(deletedObject).then(data => res.send('this todo is Deleted'))
     .catch(d => next(d))
 })
 module.exports = router;
