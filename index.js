@@ -1,27 +1,29 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const todosRoutes = require('./routes/todo');
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/users');
 const authMiddleware = require('./middlewares/auth')
-
-   mongoose.connect('mongodb://localhost:27017/test');
-
- app.use(express.json());
- app.use('/users', userRoutes);
- app.use(authMiddleware);
- app.use('/todos',todosRoutes)
+const app = express();
 
 
- app.use('*',(req,res,next)=>{
-   res.status(404).end();
+mongoose.connect('mongodb://localhost:27017/test');
 
- })
- app.use('*',(req,res,next)=>{
-  res.status(500).json({err});
+app.use(express.json());
+app.use('/users', userRoutes);
+app.use(authMiddleware);
+app.use('/todos', todosRoutes)
+
+
+app.use('*', (req, res, next) => {
+  res.status(404).end();
+
+})
+app.use('*', (req, res, next) => {
+  res.status(500).json({ err });
 
 })
 
 
 app.listen(3000, () => {
-    console.log('App is running on port: 3000');
-  })
+  console.log('App is running on port: 3000');
+})

@@ -11,7 +11,7 @@ const todoschema = new mongoose.Schema({
         default: 'To Do'
     },
     tags: {
-        type: [String],
+        type: String,
         maxlength: 10
     },
     createdAt: {
@@ -28,7 +28,6 @@ const todoschema = new mongoose.Schema({
         require: true
     }
 });
-
 const Todo = mongoose.model('Todo', todoschema);
 module.exports = Todo;
 
