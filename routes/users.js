@@ -24,12 +24,10 @@ router.post('/login', async (req, res, next) => {
   res.json({ token })
 })
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:userName', async (req, res) => {
   const updateObject = req.body;
-  const { id } = req.params.id;
-  console.log(id, "id");
-  console.log(id, req.body, "body")
-  await User.update(req.body).then(data => res.send('Done Edit'))
+  const { id } = req.params;
+  await User.updateOne(updateObject).then(data => res.send('Done Edit'))
     .catch(e => next(e))
 })
 
